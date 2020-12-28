@@ -12,5 +12,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        setUpView()
+    }
+
+    private fun setUpView(){
+        with(binding){
+            addFab.setOnClickListener {
+
+            }
+        }
     }
 }
