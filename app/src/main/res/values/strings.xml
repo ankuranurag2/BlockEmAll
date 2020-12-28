@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BlockEmAll</string>
+    <string name="empty_block_list">Block List is empty! \nStart adding numbers by clicking on the <b>"+"</b> icon.</string>
 </resources>

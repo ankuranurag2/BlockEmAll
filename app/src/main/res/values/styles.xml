@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.BlockEmAll">
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="text_style">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
