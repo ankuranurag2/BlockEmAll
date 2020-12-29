@@ -9,10 +9,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import ankuranurag2.blockemall.R
 import ankuranurag2.blockemall.data.local.ContactData
 import ankuranurag2.blockemall.databinding.ActivityMainBinding
 import ankuranurag2.blockemall.ui.adapter.ContactAdapter
+import ankuranurag2.blockemall.util.SwipeToDeleteCallback
 import ankuranurag2.blockemall.util.gone
 import ankuranurag2.blockemall.util.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +42,16 @@ class MainActivity : AppCompatActivity() {
             addFab.setOnClickListener {
                 openActivityForContact()
             }
+
+            val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val contactToDelete = (viewHolder as ContactAdapter.ContactVH).itemContactBinding.contact
+                    viewModel.deleteContact(contactToDelete!!)
+                }
+            }
+
+            val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+            itemTouchHelper.attachToRecyclerView(blockListRv)
         }
     }
 
@@ -63,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                     val name = cursor.getString(nameIndex)
                     val number = cursor.getString(numberIndex)
 
-                    viewModel.addContact(ContactData(number, name))
+                    viewModel.addContact(ContactData(number.replace(" ",""), name))
                 }
                 cursor?.close()
             }
